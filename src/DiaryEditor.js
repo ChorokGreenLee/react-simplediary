@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 
-const DiaryEditor = () => {
+const DiaryEditor = ({onCreate}) => {
     const authorInput = useRef();
     const contentInput = useRef();
 
@@ -16,7 +16,6 @@ const DiaryEditor = () => {
         console.log(e.target.value);
         setState({
             ...state,
-            /* 태그의 name값이  */
             [e.target.name]: e.target.value,
         });
     };
@@ -33,6 +32,8 @@ const DiaryEditor = () => {
             contentInput.current.focus();
             return;
         }
+
+        onCreate(state.author, state.content, state.emotion);
         alert('저장성공');
     };
 
